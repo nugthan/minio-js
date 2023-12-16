@@ -80,6 +80,7 @@ export interface ICopyDestinationOptions {
    */
   Encryption?: Encryption;
   UserMetadata?: ObjectMetaData;
+  Permissions?: 'private' | 'public-read' | 'public-read-write' | 'authenticated-read';
   /**
    * query-string encoded string or Record<string, string> Object
    */
@@ -108,6 +109,7 @@ export declare class CopyDestinationOptions {
     Object,
     Encryption,
     UserMetadata,
+    Permissions,
     UserTags,
     LegalHold,
     RetainUntilDate,

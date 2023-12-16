@@ -163,7 +163,8 @@ export interface ICopyDestinationOptions {
    * @default {}
    */
   Encryption?: Encryption
-  UserMetadata?: ObjectMetaData
+  UserMetadata?: ObjectMetaData,
+  Permissions?: 'private' | 'public-read' | 'public-read-write' | 'authenticated-read'
   /**
    * query-string encoded string or Record<string, string> Object
    */
@@ -194,6 +195,7 @@ export class CopyDestinationOptions {
     Object,
     Encryption,
     UserMetadata,
+    Permissions,
     UserTags,
     LegalHold,
     RetainUntilDate,
@@ -204,6 +206,7 @@ export class CopyDestinationOptions {
     this.Object = Object
     this.Encryption = Encryption ?? undefined // null input will become undefined, easy for runtime assert
     this.UserMetadata = UserMetadata
+    this.Permissions = Permissions
     this.UserTags = UserTags
     this.LegalHold = LegalHold
     this.Mode = Mode // retention mode
