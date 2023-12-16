@@ -182,6 +182,7 @@ export class CopyDestinationOptions {
   public readonly Object: string
   private readonly Encryption?: Encryption
   private readonly UserMetadata?: ObjectMetaData
+  private readonly Permissions?: 'private' | 'public-read' | 'public-read-write' | 'authenticated-read'
   private readonly UserTags?: Record<string, string> | string
   private readonly LegalHold?: 'on' | 'off'
   private readonly RetainUntilDate?: string
@@ -240,6 +241,9 @@ export class CopyDestinationOptions {
       for (const [key, value] of Object.entries(this.UserMetadata)) {
         headerOptions[`X-Amz-Meta-${key}`] = value.toString()
       }
+    }
+    if (this.Permissions) {
+      headerOptions['X-Amz-Acl'] = this.Permissions
     }
 
     if (this.MetadataDirective) {
